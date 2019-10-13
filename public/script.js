@@ -6,7 +6,6 @@ let predatorArr = [];
 let zombieArr = [];
 let peopleArr = [];
 
-
 function setup() {
     matrixGenerator(30, 200, 50, 30, 15, 3);
     frameRate(8);
