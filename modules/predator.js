@@ -1,35 +1,28 @@
-class People {
+var LiveForm = require("./LiveForm");
+var random = require("./random.js");
+
+
+
+module.exports = class Predator extends LiveForm {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.energy = 100;
-        this.directions = [];
+        super(x, y);
+        this.life = 13;
     }
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
-            [this.x + 1, this.y + 1],
-            [this.x - 2, this.y - 2],
-            [this.x + 2, this.y - 2],
-            [this.x - 2, this.y + 2],
-            [this.x + 2, this.y + 2]
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
         ];
     }
     chooseCell(character) {
         this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -38,29 +31,30 @@ class People {
         if (newCell) {
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 5;
-            let people = new People(x, y);
-            peopleArr.push(people);
-            this.energy = 100;
+            matrix[y][x] = 3;
+            let predator = new Predator(x, y);
+            predatorArr.push(predator);
+            this.energy = 85;
         }
     }
-    spanel() {
-        let emptyCells = this.chooseCell(4);
+    namnam() {
+        let emptyCells = this.chooseCell(2);
         let newCell = random(emptyCells);
         if (newCell) {
             this.energy++;
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 5;
+            matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
-            for (let i in zombieArr) {
-                if (zombieArr[i].x == x && zombieArr[i].y == y) {
-                    zombieArr.splice(i, 1)
+            for (let i in grasseaterArr) {
+                if (grasseaterArr[i].x == x && grasseaterArr[i].y == y) {
+                    grasseaterArr.splice(i, 1)
                 }
             }
+
             this.x = x;
             this.y = y;
-            if (this.energy >= 80) {
+            if (this.energy >= 55) {
                 this.mul();
             }
         } else {
@@ -76,7 +70,7 @@ class People {
         if (newCell) {
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 5;
+            matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
 
             this.y = y;
@@ -87,6 +81,18 @@ class People {
                 }
             }
 
+        }
+        if (this.energy < 0) {
+            this.die();
+        }
+    }
+    die() {
+        matrix[this.y][this.x] = 0;
+
+        for (let i in predatorArr) {
+            if (predatorArr[i].x == this.x && predatorArr[i].y == this.y) {
+                predatorArr.splice(i, 1)
+            }
         }
     }
 }

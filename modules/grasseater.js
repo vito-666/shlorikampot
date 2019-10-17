@@ -1,9 +1,13 @@
-class GrassEater {
+
+var LiveForm = require("./LiveForm");
+var random = require("./random.js");
+
+
+
+module.exports = class GrassEater extends LiveForm {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.life = 50;
-        this.directions = [];
+        super(x, y);
+        this.life = 10;
     }
     getNewCoordinates() {
         this.directions = [
@@ -19,30 +23,20 @@ class GrassEater {
     }
     chooseCell(character) {
         this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
     mul() {
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
 
         if (newCell) {
-
+            grasseaterHashiv++
             let x = newCell[0];
             let y = newCell[1];
             matrix[y][x] = 2;
-            let grassEater = new GrassEater(x, y);
-            grassEaterArr.push(grassEater);
-            this.life = 50;
+            let grasseater = new GrassEater(x, y);
+            grasseaterArr.push(grasseater);
+            this.life = 5;
         }
     }
     eat() {
@@ -50,6 +44,7 @@ class GrassEater {
         let newCell = random(emptyCells);
 
         if (newCell) {
+
             this.life++;
             let x = newCell[0];
             let y = newCell[1];
@@ -62,20 +57,19 @@ class GrassEater {
                     grassArr.splice(i, 1)
                 }
             }
-
             this.x = x;
             this.y = y;
 
-            if (this.life >= 15) {
+            if (this.life >= 13) {
                 this.mul();
             }
-        } else {
+        }
+        else {
             this.move()
         }
     }
     move() {
         this.life--;
-
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
 
@@ -84,15 +78,8 @@ class GrassEater {
             let y = newCell[1];
             matrix[y][x] = 2;
             matrix[this.y][this.x] = 0;
-    
             this.y = y;
             this.x = x;
-            for (let i in grassArr) {
-                if (grassArr[i].x == x && grassArr[i].y == y) {
-                    grassArr.splice(i, 1)
-                }
-            }
-
         }
         if (this.life < 0) {
             this.die();
@@ -101,9 +88,9 @@ class GrassEater {
     die() {
         matrix[this.y][this.x] = 0;
 
-        for (let i in grassEaterArr) {
-            if (grassEaterArr[i].x == this.x && grassEaterArr[i].y == this.y) {
-                grassEaterArr.splice(i, 1)
+        for (let i in grasseaterArr) {
+            if (grasseaterArr[i].x == this.x && grasseaterArr[i].y == this.y) {
+                grasseaterArr.splice(i, 1)
             }
         }
     }

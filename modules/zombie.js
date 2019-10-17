@@ -1,9 +1,12 @@
-class Zombie {
+var LiveForm = require("./LiveForm");
+var random = require("./random.js");
+
+
+
+module.exports = class Hunter extends LiveForm {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.heart = 95;
-        this.directions = [];
+        super(x, y);
+        this.life = 13;
     }
     getNewCoordinates() {
         this.directions = [
@@ -19,20 +22,7 @@ class Zombie {
     }
     chooseCell(character) {
         this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
     mul() {
         let emptyCells = this.chooseCell(0);
