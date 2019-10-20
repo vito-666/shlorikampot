@@ -3,6 +3,7 @@ var GrassEater = require("./modules/grasseater.js");
 var People = require("./modules/people.js");
 var Predator = require("./modules/predator.js");
 var Zombie = require("./modules/zombie.js");
+var Cunami = require("./modules/cunami.js");
 let random = require('./modules/random');
 
 grassArr = [];
@@ -10,6 +11,7 @@ grasseaterArr = [];
 peopleArr = [];
 predatorArr = [];
 zombieArr = [];
+cunamiArr = [];
 matrix = [];
 
 grassHashiv = 0;
@@ -17,9 +19,10 @@ grasseaterHashiv = 0;
 peopleHashiv = 0;
 predatorHashiv = 0;
 zombieHashiv = 0;
+cunamiHashiv = 0;
 
 
-function matrixGenerator(matrixSize, grass, grasseater, people, predator, zombie) {
+function matrixGenerator(matrixSize, grass, grasseater, people, predator, zombie,cunami) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -51,8 +54,14 @@ function matrixGenerator(matrixSize, grass, grasseater, people, predator, zombie
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 5;
     }
+    for (let i = 0; i < cunami; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 6;
+    }
 }
-matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(40, 25, 20, 15, 10, 2, 1);
+
 
 var express = require('express');
 var app = express();
@@ -90,6 +99,11 @@ function creatingObjects() {
                 var zombie = new Zombie(x, y);
                 zombieArr.push(zombie);
                 zombieHashiv++
+            }
+            else if (matrix[y][x] == 6) {
+                var cunami = new Cunami(x, y);
+                cunamiArr.push(cunami);
+                cunamiHashiv++
             }
         }
     }
@@ -144,15 +158,24 @@ function game() {
             zombieArr[i].utel();
         }
     }
-
+    if (cunamiArr[0] !== undefined) {
+        for (var i in cunamiArr) {
+            // cunamiArr[i].eat();
+        }
+    }
     let sendData = {
         matrix: matrix,
-        grassCounter: grassHashiv,
-        grassLiveCounter: grassArr.length,
-        eatCounter: grasseaterHashiv,
-        huntCounter: peopleHashiv,
-        termCounter: predatorHashiv,
-        titanCounter: zombieHashiv,
+        grassCount: grassHashiv,
+        grassLiveCount: grassArr.length,
+        grassEaterCount: grasseaterHashiv,
+        grassEaterLiveCount: grasseaterArr.length,
+        peopleCount: peopleHashiv,
+        peopleLiveCount: peopleArr.length,
+        predatorCount: predatorHashiv,
+        predatorLiveCount: predatorArr.length,
+        zombieCount: zombieHashiv,
+        zombieLiveCount: zombieArr.length,
+        cunamiCount: cunamiHashiv,
         weather: weather
     }
 

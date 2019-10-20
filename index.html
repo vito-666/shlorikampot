@@ -25,54 +25,73 @@
     </style>
 </head>
 
-<body>           
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <h1>Ծրագրավորում III Ստեփանակերտ</h1>
-                    </tr>
-                    <tr>
-                        <h1>Վիտալի Առստամյան</h1>
-                    </tr>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Գույն</th>
-                        <th scope="col">Նկարագրություն</th>
-                    </tr>
-                    <tr>
-                        <td>Exanak</td>
-                        <td id="weather"></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td scope="row" style="background-color:green;"></td>
-                        <td>Կանանչը խոտն է, չի ուտում,աճում է,շարժվում է ամբողջ տարածով,</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td scope="row" style="background-color:orange;"></td>
-                        <td>Գազարագունը խոտակերն է,ուտում է խոտ,երբ կյանքը 15 է բազմանում է,իսկ երբ 50 քայլ է կատարում,բայց ոչ
-                            մի խոտ չի ուտում մահանում է,ունի 50 կյանք</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td scope="row" style="background-color:red;"></td>
-                        <td>Կարմիրը գիշատիչն է,ուտում է խոտակերերին,երբ կյանքը 55 է բազմանում է,իսկ երբ 65 քայլ է կատարում,բայց
-                            ոչ մի խոտակեր չի ուտում մահանում է,ունի 85 կյանք </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td scope="row" style="background-color:black;"></td>
-                        <td>Սևն զոմբին է,ուտում է գիշատիչներին,երբ կյանքը 60 է բազմանում է,իսկ երբ 95 քայլ է կատարում,բայց
-                            ոչ մի գիշատիչ չի ուտում մահանում է,նա քայլում է 3 վանդակն մեկ,ունի 95 կյանք </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td scope="row" style="background-color:whitesmoke;"></td>
-                        <td> Սպիտակն մարդն,սպանում է զոմբիներին,երբ կյանքը 80 է բազմանում է,նա քայլում է անկյունագծով, և նա անմահ է,ունի 100 կյանք </td>
-                    </tr>
+<body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <h1>Ծրագրավորում III Ստեփանակերտ</h1>
+            </tr>
+            <tr>
+                <h1>Վիտալի Առստամյան</h1>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Գույն</th>
+                <th scope="col">Նկարագրություն</th>
+                <th scope="col">Ծնվել է</th>
+                <th scope="col">Մահացել է</th>
+            </tr>
+            <tr>
+                <td>Exanak</td>
+                <td id="weather"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td scope="row" style="background-color:green;"></td>
+                <td>Կանանչը խոտն է, չի ուտում,աճում է,շարժվում է ամբողջ տարածով,</td>
+                <td id="grassCount"></td>
+                <td id="grassLiveCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td scope="row" style="background-color:orange;"></td>
+                <td>Գազարագունը խոտակերն է,ուտում է խոտ,երբ կյանքը 15 է բազմանում է,իսկ երբ 50 քայլ է կատարում,բայց ոչ
+                    մի խոտ չի ուտում մահանում է,ունի 50 կյանք</td>
+                    <td id="grassEaterCount"></td>
+                    <td id="grassEaterLiveCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td scope="row" style="background-color:red;"></td>
+                <td>Կարմիրը գիշատիչն է,ուտում է խոտակերերին,երբ կյանքը 55 է բազմանում է,իսկ երբ 65 քայլ է կատարում,բայց
+                    ոչ մի խոտակեր չի ուտում մահանում է,ունի 85 կյանք </td>
+                    <td id="predatorCount"></td>
+                    <td id="predatorLiveCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td scope="row" style="background-color:black;"></td>
+                <td>Սևն զոմբին է,ուտում է գիշատիչներին,երբ կյանքը 60 է բազմանում է,իսկ երբ 95 քայլ է կատարում,բայց
+                    ոչ մի գիշատիչ չի ուտում մահանում է,նա քայլում է 3 վանդակն մեկ,ունի 95 կյանք </td>
+                    <td id="zombieCount"></td>
+                    <td id="zombieLiveCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td scope="row" style="background-color:whitesmoke;"></td>
+                <td> Սպիտակն մարդն,սպանում է զոմբիներին,երբ կյանքը 80 է բազմանում է,նա քայլում է անկյունագծով, և նա
+                    անմահ է,ունի 100 կյանք </td>
+                    <td id="peopleCount"></td>
+                    <td id="peopleLiveCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td scope="row" style="background-color:#03b1fc;"></td>
+                <td>Կապույտը ջուրն է,այն անվերջ է </td>
+                <td id="cunamiCount"></td>
+            </tr>
         </tbody>
     </table>
     <script src="p5.js"></script>
